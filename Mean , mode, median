@@ -1,0 +1,59 @@
+import numpy as nm
+import pandas as pd
+import seaborn as sn
+import matplotlib.pyplot as mpt
+
+data = pd.read_csv('data.csv')
+data
+
+data.shape
+
+
+data.drop('Duration', axis=1)
+
+data=data.sort_values('Pulse')
+data
+
+data['Duration'].mean()
+
+def calculate_mean(col_data):
+    total=0;
+    for i in col_data:
+        total=total+i
+        return(total)/len(col_data)
+print(calculate_mean(data['Duration']))
+
+
+def calculate_median(col_data):
+    ns=sorted(col_data)
+    mid1, mid2=0,0
+    for i in range(len(ns)):
+        if(len(ns)%2==0):
+            mid1=ns[(len(ns))//2]
+            mid2=ns[((len(ns))//2)-1]
+            return (mid1+mid2)//2
+        else:
+            return ns[len(ns)//2]
+print(calculate_median(data["Duration"]))  
+
+
+#median 
+# sort
+median_val=data.median()
+print(median_val)
+
+
+# mode
+mode_val=data.mode().iloc[0]
+print(mode_val)
+
+
+
+from collections import Counter
+def calculate_mode(col_data):
+    cntr=Counter(col_data)
+    return max(cntr, key=cntr.get)
+print(calculate_mode(data["Duration"]))
+
+
+
